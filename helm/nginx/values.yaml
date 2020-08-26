@@ -10,7 +10,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-imagePullSecrets: []
+imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
@@ -72,9 +72,11 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+mysecret:
+  password: 
+
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
-
