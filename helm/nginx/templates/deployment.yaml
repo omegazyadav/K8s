@@ -50,9 +50,11 @@ spec:
               path: /
               port: http
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            exec:  
+              command:
+                - bash 
+                - "-c"
+                - /opt/status.sh >> /var/log/nginx-status.log 2>&1
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
