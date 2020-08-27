@@ -31,13 +31,6 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
-Generate chart secret name
-*/}}
-{{- define "nginx.secretName" -}} 
-{{ default (include "mysql.fullname" .) .Values.existingSecret }}
-{{- end -}} 
-
-{{/*
 Common labels
 */}}
 {{- define "nginx.labels" -}}
