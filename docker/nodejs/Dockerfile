@@ -6,7 +6,7 @@ COPY app.js package.json ./
 RUN npm install
 
 FROM builder
-WORKDIR /opt
+WORKDIR /home/node
 USER node
 COPY --chown=node:node --from=builder /home . 
 EXPOSE 8080
