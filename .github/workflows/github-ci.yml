@@ -9,14 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v2 # may be actions/checkout@v2 now
+        - uses: actions/checkout@v2 
         - name: Login to DockerHub Registry
           run: echo ${{ secrets.DOCKERHUB_PASS }} | docker login -u ${{ secrets.DOCKERHUB_USER }} ${{ secrets.DOCKERHUB_REG }} --password-stdin
-        - name: Get the version
+        - name: Get the docker tag
           id: vars
           run: echo ::set-output name=tag::$(echo $(git log -n1 --date=format:'%y%m%d-' --format=%cd%h))
-        - name: Build the tagged Docker image
-          run: docker build $PWD/docker/python/ --file docker/python/Dockerfile --tag ${{ secrets.DOCKERHUB_USER }}/omega:${{steps.vars.outputs.tag}}
+        
+        - name: Build Python Docker Image
+          run: docker build $PWD/docker/python/ --file docker/python/Dockerfile --tag ${{ secrets.DOCKERHUB_USER }}/python:${{ steps.vars.outputs.tag }}
         - name: Push the tagged Docker image
-          run: docker push ${{ secrets.DOCKERHUB_USER }}/omega:${{steps.vars.outputs.tag}}
+          run: docker push ${{ secrets.DOCKERHUB_USER }}/python:${{ steps.vars.outputs.tag }}
 
+        - name: Build NodeJs Docker image 
+          run: docker build $PWD/docker/nodejs/ --file docker/nodejs/Dockerfile --tag ${{ secrets.DOCKERHUB_USER }}/nodejs:${{ steps.vars.outputs.tag }}
+        - name: Push the tagged Docker image
+          run: docker push ${{ secrets.DOCKERHUB_USER }}/nodejs:${{ steps.vars.outputs.tag }}
