@@ -16,7 +16,7 @@ jobs:
           id: vars
           run: echo ::set-output name=tag::$(echo $(git log -n1 --date=format:'%y%m%d-' --format=%cd%h))
         - name: Build the tagged Docker image
-          run: docker build . --file /docker/python/Dockerfile --tag ${{ secrets.DOCKERHUB_USER }}/omega:${{steps.vars.outputs.tag}}
+          run: docker build . --file docker/python/Dockerfile --tag ${{ secrets.DOCKERHUB_USER }}/omega:${{steps.vars.outputs.tag}}
         - name: Push the tagged Docker image
           run: docker push ${{ secrets.DOCKERHUB_USER }}/omega:${{steps.vars.outputs.tag}}
 
