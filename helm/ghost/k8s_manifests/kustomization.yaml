@@ -8,4 +8,11 @@ resources:
 - mysql.yml
 - ingress.yml
 - configMap.yml
-- secrets.yml
+
+secretGenerator:
+- name: mysql-sec
+  literals:
+  - USERNAME=root
+  - PASSWORD=ramanath
+  - DATABASE=ghost
+  
