@@ -23,7 +23,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysql-sec
-                  key: ROOT_PASSWORD
+                  key: PASSWORD
             - name: MYSQL_USERNAME
               valueFrom:
                 secretKeyRef:
