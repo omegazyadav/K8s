@@ -11,6 +11,5 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-      nodePort: 30001
   selector:
     {{- include "ghost-chart.selectorLabels" . | nindent 4 }}
