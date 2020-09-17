@@ -52,10 +52,14 @@ ingress:
   hosts:
     - host: ghost.omega.com
       paths: [/]
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: ghost-tls
+      hosts:
+        - ghost.omega.com
+
+ghostsecret:
+  tlscrt:
+  tlskey:
 
 resources: {}
   # limits:
