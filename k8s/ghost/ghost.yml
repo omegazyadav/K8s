@@ -15,8 +15,7 @@ spec:
       initContainers:
         - name: check-db
           image: busybox:1.28
-          #command: ['sh', '-c', '/opt/script.sh']
-          command: ['sh', '-c', 'echo omega']
+          command: ['sh', '-c', '/opt/script.sh']
           volumeMounts:
           - name: ghost-volume
             mountPath: /opt
@@ -26,6 +25,17 @@ spec:
           image: omegazyadav/ghost:200914-91fcc374
           ports:
             - containerPort: 2368
+          env:
+            - name: url 
+              value: http://ghost.omega.com
+            - name: database__connection__host
+              value: db
+            - name: database__connection__user
+              value: root
+            - name: database__connection__password
+              value: ramanath
+            - name: database__connection__database
+              value: ghost
           resources:
             requests:
               memory: "500Mi"
@@ -62,5 +72,3 @@ spec:
       protocol: TCP 
   selector:
     app: ghost
-
-
