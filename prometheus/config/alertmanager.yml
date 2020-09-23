@@ -1,0 +1,26 @@
+global:
+  resolve_timeout: 1m
+  slack_api_url: 'https://hooks.slack.com/services/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'
+
+route:
+  group_by: ['instance', 'alertname', 'severity']
+  receiver: 'slack-notifications'
+
+receivers:
+- name: slack-notifications
+  slack_configs:
+  - send_resolved: true
+    api_url: 'https://hooks.slack.com/services/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'
+    channel: '#alert'
+    username: Prometheus
+    color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+    title: '{{ template "slack.default.title" . }}'
+    title_link: '{{ template "slack.default.titlelink" . }}'
+    pretext: '{{ template "slack.default.pretext" . }}'
+    text: '{{ template "slack.default.text" . }}'
+    footer: '{{ template "slack.default.footer" . }}'
+    fallback: '{{ template "slack.default.fallback" . }}'
+    callback_id: '{{ template "slack.default.callbackid" . }}'
+    icon_emoji: '{{ template "slack.default.iconemoji" . }}'
+    icon_url: '{{ template "slack.default.iconurl" . }}'
+
