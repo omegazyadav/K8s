@@ -9,9 +9,8 @@ terraform {
 provider "docker" {
   registry_auth {
     address="https://index.docker.io/v1/"
-    config_file = "${pathexpand("~/.docker/config.json")}"
-}
-
+    config_file = pathexpand("~/.docker/config.json")
+    }
 }
 
 resource "docker_image" "hello-world" {
