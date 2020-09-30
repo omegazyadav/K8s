@@ -62,11 +62,11 @@ spec:
           ports:
             - containerPort: 3306
           volumeMounts:
+            - name: mysql-storage
+              mountPath: "/var/lib/mysql"
             - name: config
               mountPath: /script/script.sh
               subPath: script.sh 
-            - name: mysql-storage
-              mountPath: "/opt/ghost/ghost_mysql"
       volumes:
         - name: config
           configMap:
@@ -75,6 +75,7 @@ spec:
         - name: mysql-storage
           persistentVolumeClaim:
             claimName: mysql-pvc-claim
+
 
 ---
 
