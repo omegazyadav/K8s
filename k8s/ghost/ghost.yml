@@ -44,10 +44,8 @@ spec:
               memory: "1024Mi"
               cpu: "600m"
           volumeMounts:
-            - name: ghost-volume
-              mountPath: /opt
             - name: ghost-storage
-              mountPath: "/opt/ghost/ghost_content"
+              mountPath: "/var/lib/ghost/content"
       volumes:
         - name: ghost-volume
           configMap:
