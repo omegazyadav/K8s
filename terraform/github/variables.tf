@@ -3,3 +3,8 @@ variable "github_token" {
   type        = string
 }
 
+variable "username" {
+  description = "Username of a collaborator"
+  type        = string
+}
+

@@ -1,3 +1,7 @@
+# Run the command with 
+# terraform apply   -var "github_token='YOUR_GITHUB_TOKEN_HERE'"   -var "username='GITHUB_USERNAME'"
+
+
 provider "github" {
   token        = var.github_token
 }
@@ -11,6 +15,6 @@ resource "github_repository" "terraform" {
 
 resource "github_repository_collaborator" "terraform" {
   repository = "terraform"
-  username   = "dwdraju"
+  username   = var.username
   permission = "admin"
 }
