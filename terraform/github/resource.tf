@@ -1,3 +1,7 @@
+provider "github" {
+  token        = var.github_token
+}
+
 resource "github_repository" "terraform" {
   name = "terraform"
   description = "This repo is created by using terraform. "
