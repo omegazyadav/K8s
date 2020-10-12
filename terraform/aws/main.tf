@@ -9,19 +9,19 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region                  = "us-west-2"
-  shared_credentials_file = "/home/omega/.aws/credentials"
-  profile                 = "yadav"
+  region     = "us-west-2"
+  access_key = "YOUR_ACCESS_KEY"
+  secret_key = "YOUR_SECRET_KEY"
 }
 
-# Create a VPC
-resource "aws_vpc" "omega" {
-  cidr_block = "10.0.0.0/16"
+# Configure the VPC
+module "example_vpc" {
+  source = "./modules/vpc"
 }
 
-# Create a ec2 instance 
-resource "aws_instance" "example" {
-  ami           = "ami-06e54d05255faf8f6"
-  instance_type = "t2.micro"
+# Configure the ec2 instance
+module "example_ec2" {
+  source        = "./modules/ec2"
+  public_subnet = module.example_vpc.public_subnet_id
 }
 
