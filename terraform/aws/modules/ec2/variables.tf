@@ -8,12 +8,6 @@ variable "instance_type" {
   description = "Instance Type"
 }
 
-
-variable "public_subnet" {
-  type        = string
-  description = "Public Subnet"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID"

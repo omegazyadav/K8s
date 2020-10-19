@@ -62,7 +62,6 @@ module "example_ec2" {
   vpc_id                      = aws_security_group.example_sg.id
   subnet_id                   = aws_subnet.example_subnet.id
   cidr_block                  = aws_subnet.example_subnet.cidr_block
-  public_subnet               = aws_subnet.example_subnet.cidr_block
   vpc_security_group_ids      = [aws_security_group.example_sg.id]
   associate_public_ip_address = true
 }
