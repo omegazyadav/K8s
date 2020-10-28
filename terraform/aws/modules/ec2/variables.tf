@@ -18,11 +18,6 @@ variable "cidr_block" {
   description = "CIDR Block"
 }
 
-#variable "security_groups" {
-#  type        = list(string)
-#  description = "Security Group for EC2"
-#}
-
 variable "vpc_security_group_ids" {
   type        = list(string)
   description = "Security Group ID"
