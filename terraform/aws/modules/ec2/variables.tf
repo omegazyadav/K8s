@@ -8,16 +8,6 @@ variable "instance_type" {
   description = "Instance Type"
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "VPC ID"
-}
-
-variable "cidr_block" {
-  type        = string
-  description = "CIDR Block"
-}
-
 variable "vpc_security_group_ids" {
   type        = list(string)
   description = "Security Group ID"
