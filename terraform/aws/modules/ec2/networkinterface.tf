@@ -1,5 +1,5 @@
 resource "aws_network_interface" "defaultNIC" {
-  subnet_id = aws_subnet.example_subnet.id
+  subnet_id = aws_subnet.public_subnet.id
 
   tags = {
     Name = "Example"

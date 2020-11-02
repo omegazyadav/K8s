@@ -1,5 +1,5 @@
 output "subnet_id" {
-  value = aws_subnet.example_subnet.id
+  value = aws_subnet.public_subnet.id
 }
 
 output "public_ip" {
