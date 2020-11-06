@@ -8,23 +8,28 @@ resource "aws_instance" "instance" {
     device_index         = 0
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "apt-get -y update && apt-get -y upgrade",
-      "apt-get install -y nginx",
-      "systemctl start nginx"
-    ]
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      host        = aws_eip.public_ip.public_ip
-      agent       = false
-      private_key = file("~/.ssh/id_rsa")
-    }
-  }
-
   tags = {
     project = "Example"
   }
 }
+
+resource "null_resource" "instance" {
+  depends_on = [aws_eip.public_ip, aws_instance.instance]
+  connection {
+    #type        = "ssh"
+    user        = "ubuntu"
+    host        = aws_eip.public_ip.public_ip
+    private_key = file("~/.ssh/id_rsa")
+    agent       = "false"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get -y update && sudo apt-get -y upgrade",
+      "sudo apt-get install -y nginx",
+      "sudo systemctl start nginx",
+    ]
+    on_failure = continue
+  }
+}
+
