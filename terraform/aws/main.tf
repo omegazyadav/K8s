@@ -9,6 +9,16 @@ module "example_ec2" {
 }
 
 
+module "example_db" {
+  source = "./modules/rds"
+
+  vpc_id          = module.example_ec2.example_vpc
+  security_group  = module.example_ec2.example_sg
+  private_subnet1 = module.example_ec2.private_subnet1
+  private_subnet2 = module.example_ec2.private_subnet2
+
+}
+
 # Configure the output
 output "ec2_details" {
   value = module.example_ec2
