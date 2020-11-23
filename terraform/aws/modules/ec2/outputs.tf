@@ -2,8 +2,12 @@ output "subnet_id" {
   value = aws_subnet.public_subnet.id
 }
 
-output "public_ip" {
-  value = aws_eip.public_ip.public_ip
+output "public_ip1" {
+  value = aws_eip.public_ip1.public_ip
+}
+
+output "public_ip2" {
+  value = aws_eip.public_ip2.public_ip
 }
 
 output "example_vpc" {
