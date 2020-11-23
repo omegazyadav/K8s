@@ -14,11 +14,11 @@ resource "aws_instance" "instance" {
 }
 
 resource "null_resource" "instance" {
-  depends_on = [aws_eip.public_ip, aws_instance.instance]
+  depends_on = [aws_eip.public_ip1, aws_instance.instance]
   connection {
     #type        = "ssh"
     user        = "ubuntu"
-    host        = aws_eip.public_ip.public_ip
+    host        = aws_eip.public_ip1.public_ip
     private_key = file("~/.ssh/id_rsa")
     agent       = "false"
   }
