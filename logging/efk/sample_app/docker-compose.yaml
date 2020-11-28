@@ -1,0 +1,33 @@
+version: '3'
+services:
+  ghost:
+    image: ghost:latest
+    container_name: ghost_app
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+    restart: always
+    ports:
+      - "8000:2368"
+    depends_on:
+      - db
+    environment:
+      url: http://localhost:8000
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: ramanath
+      database__connection__database: ghost
+    volumes:
+      - /opt/ghost/ghost_content:/var/lib/ghost/content
+
+  db:
+    image: mysql:5.7
+    container_name: ghost_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ramanath
+    volumes:
+      - /opt/ghost/ghost_mysql:/var/lib/mysql
+
