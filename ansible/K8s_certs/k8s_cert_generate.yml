@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Check the Certificate Expiration Date
+      shell: kubeadm alpha certs check-expiration
+      register: check_certs
+    
+    - debug:
+        var: check_certs.stdout_lines
+    
+    - name: Make the Backup Directory
+      file:
+        path: /opt/BACKUP_etc_kubernetes_pki/
+        state: directory
+    
+    - name: Move all the PKI into Backup Directory
+      shell: cp -r /etc/kubernetes/pki/. /opt/BACKUP_etc_kubernetes_pki/
+
+    - name: Renew the Kubernetes Certificate
+      shell: kubeadm alpha certs renew all
+      register: gen_certs
+
+    - debug:
+        var: gen_certs.stdout_lines
+
+    - name: Create a backup directory for Kubernetes Configs
+      file:
+        path: /opt/BACKUP_etc_kubernetes
+        state: directory
+    
+    - name: Take the backup of the kubernetes Config files
+      copy:
+        src: '{{ item }}'
+        dest: /opt/BACKUP_etc_kubernetes/
+      loop:
+        - /etc/kubernetes/admin.conf
+        - /etc/kubernetes/controller-manager.conf
+        - /etc/kubernetes/kubelet.conf
+        - /etc/kubernetes/scheduler.conf
+
+    - name: Generate the kubeconfigs 
+      shell: kubeadm init phase kubeconfig all
+
