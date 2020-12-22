@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 
-module "s3_bucket" {
+module "website_s3_bucket" {
   source = "./modules/aws-s3-bucket"
 
   bucket_name = "omegazyadav-2020-12-21"
@@ -15,4 +15,3 @@ module "s3_bucket" {
     Environment = "dev"
   }
 }
-
