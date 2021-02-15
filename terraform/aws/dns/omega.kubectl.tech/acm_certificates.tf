@@ -1,4 +1,5 @@
 resource "aws_acm_certificate" "omega" {
+  #provider = aws.acm_provider
   domain_name       = "omega.kubectl.tech"
   validation_method = "DNS"
 
@@ -6,6 +7,10 @@ resource "aws_acm_certificate" "omega" {
     "omega.kubectl.tech",
     "*.omega.kubectl.tech",
   ]
+
+  tags = {
+    Environment = "omega"
+  }
 }
 
 data "aws_route53_zone" "kubectl_tech" {
