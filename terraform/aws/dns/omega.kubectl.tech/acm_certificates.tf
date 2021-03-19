@@ -3,7 +3,7 @@ resource "aws_acm_certificate" "omega" {
   domain_name       = "omega.kubectl.tech"
   validation_method = "DNS"
 
-  subject_alternative_names = [ 
+  subject_alternative_names = [
     "omega.kubectl.tech",
     "*.omega.kubectl.tech",
   ]
