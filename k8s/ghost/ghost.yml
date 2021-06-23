@@ -19,7 +19,6 @@ spec:
           volumeMounts:
           - name: ghost-volume
             mountPath: /opt
-      nodeName: system
       containers:
         - name: ghost
           image: omegazyadav/ghost:200914-91fcc374
