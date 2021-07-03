@@ -1,12 +1,12 @@
 output "Nameserver_Details" {
-    value = aws_route53_zone.kubectl_tech.*.name_servers
+    value = module.kubectl_tech.nameserver_details
 }
 
 output "ACM_Certificates" {
-  value  = module.dns.ACM_Certificates
+  value  = module.omega.ACM_Certificates
 }
 
 output "DNS_Records" {
-  value  = module.dns.DNS_Records
+  value  = module.omega.DNS_Records
 }
 

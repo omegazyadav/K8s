@@ -1,4 +1,9 @@
-module "dns" {
+module "kubectl_tech" {
+  source = "./kubectl.tech"
+
+}
+
+module "omega" {
   source = "./omega.kubectl.tech"
 
   providers = {
