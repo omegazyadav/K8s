@@ -61,11 +61,12 @@ kind: Service
 metadata:
   name: ghost-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: http
       port: 8080
       targetPort: 2368
+      nodePort: 30007
       protocol: TCP 
   selector:
     app: ghost
