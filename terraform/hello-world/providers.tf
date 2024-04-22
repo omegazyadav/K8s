@@ -1,14 +1,23 @@
 terraform {
   required_providers {
     docker = {
-      source = "terraform-providers/docker"
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
     }
   }
 }
 
 provider "docker" {
-  registry_auth {
-    address="https://index.docker.io/v1/"
-    config_file = pathexpand("~/.docker/config.json")
-    }
+  host = "unix:///Users/yadavlamichhane/.docker/run/docker.sock"
+}
+
+# Pulls the image
+resource "docker_image" "ubuntu" {
+  name = "ubuntu:latest"
+}
+
+# Create a container
+resource "docker_container" "foo" {
+  image = docker_image.ubuntu.image_id
+  name  = "foo"
 }
